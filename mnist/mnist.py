@@ -3,7 +3,7 @@ import numpy as np
 import sys
 
 sys.path.append('..')
-from neural import NeuralNetwork
+from feedforward import NeuralNetwork
 from visualization import Plot
 
 with open("numbers.pickle", 'rb') as handle:
