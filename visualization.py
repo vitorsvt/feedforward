@@ -3,11 +3,11 @@ import matplotlib.collections
 import matplotlib.pyplot as plt
 
 class Plot:
-    def __init__(self, network, INPUT_SAMPLE):
+    def __init__(self, network, input_sample):
         self.nn = network
         self.circles = []
         self.lines = []
-        self.sizes = self.getInfo(INPUT_SAMPLE)
+        self.sizes = self.getInfo(input_sample)
         self.width = (len(self.sizes))*4
         self.height = max(self.sizes[1:])
         self.big_inputs = False

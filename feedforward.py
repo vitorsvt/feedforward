@@ -1,7 +1,6 @@
 import math, random, pickle, time
 import numpy as np
 
-from os import system, name
 
 class Neuron:
     def __init__(self, pos, is_out=False):
@@ -39,7 +38,6 @@ class Neuron:
             for output_neuron in self.outputs:
                 delta_sum += output_neuron.delta * output_neuron.weights[cur_weight_index]
             self.delta = delta_sum * self.derSigmoid(self.output)
-
         self.updated_weights = [] # New weight values
         for cur_weight, cur_input in zip(self.weights, self.inputs):
             gradient = self.delta * cur_input
@@ -49,9 +47,11 @@ class Neuron:
     @staticmethod
     def sigmoid(x):
         return 1 / (1 + math.exp(-x))
+
     @staticmethod
     def derSigmoid(x):
         return x * ( 1 - x )
+
 
 class Layer:
     def __init__(self, n_neuron, is_out=False):
@@ -71,6 +71,7 @@ class Layer:
     def forward(self, row):
         activations = [neuron.forward(row) for neuron in self.neurons]
         return activations
+
 
 class NeuralNetwork:
     def __init__(self, name):
@@ -117,7 +118,6 @@ class NeuralNetwork:
     def backpropagate(self, inputs, outputs, rate, iterations):
         self.rate = rate
         n_row = len(inputs)
-
         t0 = time.perf_counter()
         for i in range(iterations):
             r_index = random.randint(0, n_row-1)
