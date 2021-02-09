@@ -1,3 +1,4 @@
+from visualization import Plot
 import math, random, pickle, time
 import numpy as np
 
@@ -152,3 +153,22 @@ class NeuralNetwork:
         print(f"CORRECT RATIO: {(correct/len(samples))*100}%")
         print("="*20)
 
+def main():
+    with open("mnist/numbers.pickle", 'rb') as handle:
+        name, weights = pickle.load(handle)
+
+    with np.load("mnist/numbers.npz") as data:
+        INPUTS = data['training_images']
+        OUTPUTS = data['training_labels']
+
+    nn = NeuralNetwork(name)
+    nn.load(weights)
+
+    plot = Plot(nn, INPUTS[0])
+    while True:
+        current = random.randint(0, len(INPUTS))
+        nn.predict(INPUTS[current])
+        plot.plotNetwork(INPUTS[current])
+
+if __name__ == "__main__":
+    main()
